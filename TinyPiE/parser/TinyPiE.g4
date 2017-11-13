@@ -21,7 +21,7 @@ mulExpr: mulExpr MULOP unaryExpr
 	;
 
 
-unaryExpr: VALUE			# literalExpr
+unaryExpr: unaryExpr UNOP VALUE			# literalExpr
 	| IDENTIFIER			# varExpr
 	| '(' expr ')'			# parenExpr
 	;
@@ -30,6 +30,7 @@ ADDOP: '+'|'-';
 MULOP: '*'|'/';
 ANDOP: '&';
 OROP: '|';
+UNOP: '-'|'~';
 
 IDENTIFIER: 'x'|'y'|'z';
 VALUE: [1-9][0-9]*;

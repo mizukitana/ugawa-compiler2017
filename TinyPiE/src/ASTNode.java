@@ -15,6 +15,19 @@ class ASTBinaryExprNode extends ASTNode {
 	}
 }
 
+class ASTUnaryExprNode extends ASTNode {
+	String op;
+	ASTNode operand;
+	ASTUnaryExprNode(String op, ASTNode operand) {
+		this.op = op;
+		this.operand = operand;
+	}
+	@Override
+	public String toString() {
+		return "(UnExpr "+op+" "+operand+")";
+	}
+}
+
 class ASTNumberNode extends ASTNode {
 	int value;
 	ASTNumberNode(int value) {
