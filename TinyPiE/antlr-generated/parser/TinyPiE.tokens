@@ -1,0 +1,13 @@
+T__0=1
+T__1=2
+ADDOP=3
+MULOP=4
+ANDOP=5
+OROP=6
+IDENTIFIER=7
+VALUE=8
+WS=9
+'('=1
+')'=2
+'&'=5
+'|'=6
