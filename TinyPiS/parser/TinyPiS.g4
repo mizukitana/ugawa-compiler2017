@@ -1,8 +1,20 @@
-// antlr4 -package parser -o antlr-generated  -no-listener parser/TinyPiE.g4
-grammar TinyPiE;
+// antlr4 -package parser -o antlr-generated  -no-listener parser/TinyPiS.g4
+grammar TinyPiS;
+
+prog: varDecls stmt
+	;
+     
+varDecls: ('var' IDENTIFIER ';')*
+	;
+     
+stmt: '{' stmt* '}'							# cmpoundStmt
+	| IDENTIFIER '=' expr ';'				# assignStmt
+	| 'if' '(' expr ')' stmt 'else' stmt 	# ifStmt
+	| 'while' '(' expr ')' stmt  			# whileStmt
+	;
 
 expr: addExpr
-      ;
+	;
 
 addExpr: addExpr ADDOP mulExpr
 	| mulExpr
