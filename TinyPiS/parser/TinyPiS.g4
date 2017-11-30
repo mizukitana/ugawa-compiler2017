@@ -1,11 +1,14 @@
 // antlr4 -package parser -o antlr-generated  -no-listener parser/TinyPiS.g4
 grammar TinyPiS;
 
-prog: varDecls stmt
+ProgContext: varDecls stmt
 	;
      
 varDecls: ('var' IDENTIFIER ';')*
 	;
+ 
+CompoundStmtContext: AssignStmtContext stmt
+	; 
      
 stmt: '{' stmt* '}'							# cmpoundStmt
 	| IDENTIFIER '=' expr ';'				# assignStmt
