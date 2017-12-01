@@ -13,19 +13,34 @@ public class Interpreter extends InterpreterBase {
 			ASTBinaryExprNode nd = (ASTBinaryExprNode) ndx;
 			int lhsValue = evalExpr(nd.lhs, env);
 			int rhsValue = evalExpr(nd.rhs, env);
-			if (nd.op.equals("+"))
+			if (nd.op.equals("|"))
+				return lhsValue | rhsValue;
+			else if (nd.op.equals("&"))
+				return lhsValue & rhsValue;
+			else if (nd.op.equals("+"))
 				return lhsValue + rhsValue;
 			else if (nd.op.equals("-"))
 				return lhsValue - rhsValue;
+			else if (nd.op.equals("*"))
+				return lhsValue * rhsValue;
 			else if (nd.op.equals("/"))
 				return lhsValue / rhsValue;
 			else 
-				throw new Error("Unknown operater: "+nd.op);
-		} else if (ndx instanceof ASTVarRefNode) {
+				throw new Error("Unknwon operator: "+nd.op);
+		} else if (ndx instanceof ASTUnaryExprNode) {
+			ASTUnaryExprNode nd = (ASTUnaryExprNode) ndx;
+			int rhsValue = evalExpr(nd.rhs, env);
+			if (nd.op.equals("~"))
+				return ~ rhsValue;
+			else if (nd.op.equals("-"))
+				return - rhsValue;
+			else 
+				throw new Error("Unknwon operator: "+nd.op);
+		} else if (ndx instanceof ASTNumberNode) {
 			ASTNumberNode nd = (ASTNumberNode) ndx;
 			return nd.value;
 		} else if (ndx instanceof ASTVarRefNode) {
-			ASTVarRefNode nd =(ASTVarRefNode) ndx;
+			ASTVarRefNode nd = (ASTVarRefNode) ndx;
 			Variable var = env.lookup(nd.varName);
 			if (var == null)
 				throw new Error("Undefined variable: "+nd.varName);
@@ -34,6 +49,8 @@ public class Interpreter extends InterpreterBase {
 			throw new Error("Unknown expression: "+ndx);
 		}
 	}
+	
+	
 
 	public int eval(ASTNode ast) {
 		Environment env = new Environment();

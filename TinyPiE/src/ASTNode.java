@@ -17,14 +17,14 @@ class ASTBinaryExprNode extends ASTNode {
 
 class ASTUnaryExprNode extends ASTNode {
 	String op;
-	ASTNode operand;
-	ASTUnaryExprNode(String op, ASTNode operand) {
+	ASTNode rhs;
+	ASTUnaryExprNode(String op, ASTNode rhs) {
 		this.op = op;
-		this.operand = operand;
+		this.rhs = rhs;
 	}
 	@Override
 	public String toString() {
-		return "(UnExpr "+op+" "+operand+")";
+		return "(UnExpr "+op+" "+rhs+")" ;
 	}
 }
 

@@ -15,6 +15,9 @@ public class CompilerBase {
 	void emitI(String op, int imm) {
 		System.out.println("\t"+op+" #"+imm);
 	}
+	void emitR(String op, String rd) {
+		System.out.println("\t"+op+" "+rd);
+	}
 	void emitRR(String op, String rd, String rs) {
 		System.out.println("\t"+op+" "+rd+", "+rs);
 	}
@@ -26,6 +29,9 @@ public class CompilerBase {
 	}
 	void emitRRI(String op, String rd, String rs1, int imm) {
 		System.out.println("\t"+op+" "+rd+", "+rs1+", #"+imm);
+	}
+	void emitRIR(String op, String rd, int imm, String rs1) {
+		System.out.println("\t"+op+" "+rd+", #"+imm+", "+rs1);
 	}
 	void emitJMP(String op, String Label) {
 		System.out.println("\t"+op+" "+Label);

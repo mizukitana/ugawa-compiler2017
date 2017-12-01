@@ -200,21 +200,21 @@ public class TinyPiSParser extends Parser {
 		}
 		public IfStmtContext(StmtContext ctx) { copyFrom(ctx); }
 	}
-	public static class AssignStmtContext extends StmtContext {
-		public TerminalNode IDENTIFIER() { return getToken(TinyPiSParser.IDENTIFIER, 0); }
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
-		}
-		public AssignStmtContext(StmtContext ctx) { copyFrom(ctx); }
-	}
-	public static class CmpoundStmtContext extends StmtContext {
+	public static class CompoundStmtContext extends StmtContext {
 		public List<StmtContext> stmt() {
 			return getRuleContexts(StmtContext.class);
 		}
 		public StmtContext stmt(int i) {
 			return getRuleContext(StmtContext.class,i);
 		}
-		public CmpoundStmtContext(StmtContext ctx) { copyFrom(ctx); }
+		public CompoundStmtContext(StmtContext ctx) { copyFrom(ctx); }
+	}
+	public static class AssignStmtContext extends StmtContext {
+		public TerminalNode IDENTIFIER() { return getToken(TinyPiSParser.IDENTIFIER, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public AssignStmtContext(StmtContext ctx) { copyFrom(ctx); }
 	}
 
 	public final StmtContext stmt() throws RecognitionException {
@@ -226,7 +226,7 @@ public class TinyPiSParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__2:
-				_localctx = new CmpoundStmtContext(_localctx);
+				_localctx = new CompoundStmtContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(25);

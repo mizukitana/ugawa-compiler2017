@@ -1,16 +1,13 @@
 // antlr4 -package parser -o antlr-generated  -no-listener parser/TinyPiS.g4
 grammar TinyPiS;
 
-ProgContext: varDecls stmt
+prog: varDecls stmt
 	;
      
 varDecls: ('var' IDENTIFIER ';')*
 	;
- 
-CompoundStmtContext: AssignStmtContext stmt
-	; 
      
-stmt: '{' stmt* '}'							# cmpoundStmt
+stmt: '{' stmt* '}'							# compoundStmt
 	| IDENTIFIER '=' expr ';'				# assignStmt
 	| 'if' '(' expr ')' stmt 'else' stmt 	# ifStmt
 	| 'while' '(' expr ')' stmt  			# whileStmt
@@ -29,11 +26,12 @@ mulExpr: mulExpr MULOP unaryExpr
 
 unaryExpr: VALUE			# literalExpr
 	| IDENTIFIER			# varExpr
-	| '(' expr ')'			# parenExpr
+	| '(' expr ')'		# parenExpr
 	;
 
 ADDOP: '+'|'-';
 MULOP: '*'|'/';
+
 
 IDENTIFIER: 'x'|'y'|'z'|'answer';
 VALUE: [0-9]+;

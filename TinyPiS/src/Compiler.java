@@ -9,33 +9,7 @@ import parser.TinyPiSParser;
 
 public class Compiler extends CompilerBase {
 	void compileExpr(ASTNode ndx, Environment env) {
-		if (ndx instanceof ASTCompoundStmtNode) {
-			
-		} else if (ndx instanceof ASTAssignStmtNode) {
-			ASTAssignStmtNode nd = (ASTAssignStmtNode) ndx;
-			Variable var = env.lookup(nd.var);
-			if (var == null)
-				throw new Error("undefined variable: "+nd.var);
-			compileExpr(nd.expr, env);
-			if (var instanceof GlobalVariable) {
-				GlobalVariable globalVar = (GlobalVariable) var;
-				emitLDC(REG_R1, globalVar.getLabel());
-				emitSTR(REG_DST, REG_R1, 0);
-			} else 
-				throw new Error("Not a global variable: "+nd.var);
-		} else if (ndx instanceof ASTIfStmtNode) {
-			ASTIfStmtNode nd = (ASTIfStmtNode) ndx;
-			String elseLabel = freshLabel();
-			String endLabel = freshLabel();
-			compileExpr(nd.cond, env);
-			emitRI("cmp", REG_DST, 0);
-			emitJMP("beq", elseLabel);
-			compileStmt(nd.thenClause, env);
-			emitJMP("b", endLabel);
-			emitLabel(elseLabel);
-			compileStmt(nd.elseClause, env);
-			emitLabel(endLabel);
-		} else if (ndx instanceof ASTBinaryExprNode) {
+		if (ndx instanceof ASTBinaryExprNode) {
 			ASTBinaryExprNode nd = (ASTBinaryExprNode) ndx;
 			compileExpr(nd.lhs, env);
 			emitPUSH(REG_R1);
