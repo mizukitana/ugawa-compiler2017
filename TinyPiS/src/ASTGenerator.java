@@ -25,7 +25,10 @@ public class ASTGenerator {
 				varDecls.add(token.getText());
 			ASTNode stmt = translate(ctx.stmt());
 			return new ASTProgNode(varDecls, stmt);
-		} else if (ctxx instanceof CompoundStmtContext) {
+		} 
+		
+		//複合文
+		else if (ctxx instanceof CompoundStmtContext) {
 			CompoundStmtContext ctx = (CompoundStmtContext) ctxx;
 			ArrayList<ASTNode> stmts = new ArrayList<ASTNode>();
 			for (StmtContext t: ctx.stmt()) {
@@ -33,20 +36,27 @@ public class ASTGenerator {
 				stmts.add(n);
 			}
 			return new ASTCompoundStmtNode(stmts);
-		} else if (ctxx instanceof AssignStmtContext) {
+		} 
+		
+		//代入文
+		else if (ctxx instanceof AssignStmtContext) {
 			AssignStmtContext ctx = (AssignStmtContext) ctxx;
 			String var = ctx.IDENTIFIER().getText();
 			ASTNode expr = translate(ctx.expr());
 			return new ASTAssignStmtNode(var, expr);
 		} 
 		
+		//if
 		else if (ctxx instanceof IfStmtContext) {
 			IfStmtContext ctx = (IfStmtContext) ctxx;
 			ASTNode cond = translate(ctx.expr());
 			ASTNode thenClause = translate(ctx.stmt(0));
 			ASTNode elseClause = translate(ctx.stmt(1));
 			return new ASTIfStmtNode(cond, thenClause, elseClause);
-		} else if (ctxx instanceof WhileStmtContext) {
+		} 
+		
+		//while
+		else if (ctxx instanceof WhileStmtContext) {
 			WhileStmtContext ctx = (WhileStmtContext) ctxx;
 			ASTNode cond = translate(ctx.expr());
 			ASTNode stmt = translate(ctx.stmt());

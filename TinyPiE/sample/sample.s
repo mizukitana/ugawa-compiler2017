@@ -10,11 +10,20 @@ _Pi_var_z:
 	.global _start
 _start:
 	@式をコンパイルした命令列
-	ldr r0, =#1
+	ldr r0, =_Pi_var_z
+	ldr r0, [r0, #0]
+	str r1, [sp, #-4]!
+	mov r1, r0
+	ldr r0, =_Pi_var_y
+	ldr r0, [r0, #0]
 	str r1, [sp, #-4]!
 	mov r1, r0
 	mvn r0, r1
 	ldr r1, [sp], #4
+	and r0, r1, r0
+	ldr r1, [sp], #4
 	@ EXITシステムコール
 	mov r7, #1
 	swi #0
+
+

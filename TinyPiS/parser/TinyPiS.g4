@@ -33,6 +33,6 @@ ADDOP: '+'|'-';
 MULOP: '*'|'/';
 
 
-IDENTIFIER: 'x'|'y'|'z'|'answer';
-VALUE: [0-9]+;
+IDENTIFIER: 'answer'|[_][0-9]+|[a-zA-Z][0-9]*;
+VALUE: [0]|[1-9][0-9]*;
 WS: [ \t\r\n] -> skip;

@@ -1,9 +1,9 @@
-var x; var y;
+var answer; var _123; var A23;
 {
-  x = 15;
+  _123 = 15;
   if (x)
-    y = x;
+    A23 = _123;
   else
-    y = 128;
-  answer = y - 1;
+    A23 = 128;
+  answer = A23 - 1;
 }
