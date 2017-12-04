@@ -8,10 +8,10 @@ _Pi_var_i:
 	.word 0
 _Pi_var_answer:
 	.word 0
-_Pi_var_buf:
-	.space	10, 0
+buf:
+	.space	8, 0
 	.byte 0x0a
-	.equ len, . - _Pi_var_buf
+	.equ len, . - buf
 	.section .text
 	.global _start
 _start:
@@ -86,7 +86,7 @@ L2:
 	and r0, r1, r0
 	ldr r1, [sp], #4
 	mov r0, r0
-	ldr r1, =_Pi_var_buf+10
+	ldr r1, =buf+8
 	mov r2, #16
 	mov r3, #8
 L3:
@@ -113,7 +113,7 @@ L4:
 L5:
 	mov r7, #4
 	mov r0, #1
-	ldr r1, =_Pi_var_buf
+	ldr r1, =buf
 	ldr r2, =len
 	swi #0
 	@ EXITシステムコール

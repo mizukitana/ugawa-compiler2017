@@ -92,21 +92,22 @@ public class Interpreter extends InterpreterBase {
 		}
 		if (env.lookup("answer") == null)
 			addGlobalVariable(env, "answer", 0);
-			evalStmt(prog.stmt, env);
-			Variable varAnswer = env.lookup("answer");
-			return varAnswer.get();
-		}
+		evalStmt(prog.stmt, env);
+		Variable varAnswer = env.lookup("answer");
+		return varAnswer.get();
+	}
+	
 
 	public static void main(String[] args) throws IOException {
 		ANTLRInputStream input = new ANTLRInputStream(System.in);
 		TinyPiSLexer lexer = new TinyPiSLexer(input);
 		CommonTokenStream token = new CommonTokenStream(lexer);
-        TinyPiSParser parser = new TinyPiSParser(token);
-        ParseTree tree = parser.prog();
-        ASTGenerator astgen = new ASTGenerator();
-        ASTNode ast = astgen.translate(tree);
-        Interpreter interp = new Interpreter();
-        int answer = interp.eval(ast);
-        System.out.println(answer);
+       TinyPiSParser parser = new TinyPiSParser(token);
+       ParseTree tree = parser.prog();
+       ASTGenerator astgen = new ASTGenerator();
+       ASTNode ast = astgen.translate(tree);
+       Interpreter interp = new Interpreter();
+       int answer = interp.eval(ast);
+       System.out.println(answer);
 	}
 }

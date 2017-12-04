@@ -51,9 +51,9 @@ public class Compiler extends CompilerBase {
 			ASTPrintStmtNode nd = (ASTPrintStmtNode) ndx;
 			compileExpr(nd.expr, env);
 			String loop = freshLabel(), hex = freshLabel(), endLabel = freshLabel();
-			String buf = "_Pi_var_buf", len = "len";
+			String buf = "buf", len = "len";
 			emitRR("mov", REG_DST, REG_DST);
-			emitLDC2(REG_R1, buf, 10);
+			emitLDC2(REG_R1, buf, 8);
 			emitRI("mov", REG_R2, 16);
 			emitRI("mov", REG_R3, 8);
 			emitLabel(loop);
@@ -158,11 +158,10 @@ public class Compiler extends CompilerBase {
 			System.out.println("\t.word 0");
 		}
 		if (env.lookup("print") == null) {
-			GlobalVariable v = addGlobalVariable(env, "buf");
-			emitLabel(v.getLabel());
-			System.out.println("\t.space\t10, 0");
+			System.out.println("buf:");
+			System.out.println("\t.space\t8, 0");
 			System.out.println("\t.byte 0x0a");
-			System.out.println("\t.equ len, . - _Pi_var_buf");
+			System.out.println("\t.equ len, . - buf");
 		}
 		System.out.println("\t.section .text");
 		System.out.println("\t.global _start");
