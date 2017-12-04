@@ -7,10 +7,11 @@ _start:
 	ldr	r0, =N
 	ldr	r1, =buf + nchar
 	mov	r2, #16
-	mov	r3, #nchar
+	mov	r3, #8
 	
 loop:
 	sub	r1, r1, #1
+	sub r3, r3, #1
 	udiv	r4, r0, r2
 	mul	r5, r2, r4
 	sub	r6, r0, r5
@@ -19,7 +20,7 @@ loop:
 	add	r6, r6, #'0'
 	strb	r6, [r1]
 	mov	r0, r4
-	cmp	r0, #0
+	cmp	r3, #0
 	bhi	loop
 	b	end
 hex:
@@ -27,7 +28,7 @@ hex:
 	add	r6, r6, #'A'
 	strb	r6, [r1]
 	mov	r0, r4
-	cmp	r0, #0
+	cmp	r3, #0
 	bhi	loop
 end:	
 	@ write

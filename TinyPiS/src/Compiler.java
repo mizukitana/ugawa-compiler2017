@@ -55,9 +55,10 @@ public class Compiler extends CompilerBase {
 			emitRR("mov", REG_DST, REG_DST);
 			emitLDC2(REG_R1, buf, 10);
 			emitRI("mov", REG_R2, 16);
-			emitRI("mov", REG_R3, 10);
+			emitRI("mov", REG_R3, 8);
 			emitLabel(loop);
 			emitRRI("sub", REG_R1, REG_R1, 1);
+			emitRRI("sub", REG_R3, REG_R3, 1);
 			emitRRR("udiv", REG_R4, REG_DST, REG_R2);
 			emitRRR("mul", REG_R5, REG_R2, REG_R4);
 			emitRRR("sub", REG_R6, REG_DST, REG_R5);
@@ -66,7 +67,7 @@ public class Compiler extends CompilerBase {
 			emitRRI("add", REG_R6, REG_R6, '0');
 			emitSTRB(REG_R6, REG_R1);
 			emitRR("mov", REG_DST, REG_R4);
-			emitRI("cmp", REG_DST, 0);
+			emitRI("cmp", REG_R3, 0);
 			emitJMP("bhi", loop);
 			emitJMP("b", endLabel);
 			emitLabel(hex);
@@ -74,7 +75,7 @@ public class Compiler extends CompilerBase {
 			emitRRI("add", REG_R6, REG_R6, 'A');
 			emitSTRB(REG_R6, REG_R1);
 			emitRR("mov", REG_DST, REG_R4);
-			emitRI("cmp", REG_DST, 0);
+			emitRI("cmp", REG_R3, 0);
 			emitJMP("bhi", loop);
 			emitLabel(endLabel);
 			emitRI("mov", REG_R7, 4);

@@ -10,5 +10,5 @@ var x; var y; var i;
 		i = i + 1;
 	}
 	answer = ~y & 15;
-	print 1+10;
+	print ~y & 15;
 }
