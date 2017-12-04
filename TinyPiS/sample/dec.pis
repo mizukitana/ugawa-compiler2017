@@ -1,9 +1,14 @@
-var answer; var _123; var A23;
+var x; var y; var i;
 {
-  _123 = 15;
-  if (x)
-    A23 = _123;
-  else
-    A23 = 128;
-  answer = A23 - 1;
+	x = 15;
+	if (x)
+		y = -x;
+	else
+		y = 128;
+	while (i) {
+		y = y + 10;
+		i = i + 1;
+	}
+	answer = ~y & 15;
+	print 1+10;
 }
